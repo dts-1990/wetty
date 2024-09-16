@@ -43,6 +43,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@types/wicg-file-system-access": "^2023.10.5",
     "compression": "^1.7.4",
     "etag": "^1.8.1",
     "express": "^4.17.1",

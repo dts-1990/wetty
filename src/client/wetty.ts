@@ -10,6 +10,7 @@ import { verifyPrompt } from './wetty/disconnect/verify';
 import { FileDownloader } from './wetty/download';
 import { FlowControlClient } from './wetty/flowcontrol';
 import { mobileKeyboard } from './wetty/mobile';
+import { LogWriter } from './wetty/serialize';
 import { socket } from './wetty/socket';
 import { terminal, Term } from './wetty/term';
 
@@ -37,9 +38,13 @@ socket.on('connect', () => {
   const fileDownloader = new FileDownloader();
   const fcClient = new FlowControlClient();
 
+  const logWriter = new LogWriter();
+  logWriter.writeLine("First line...") 
+
   term.onData((data: string) => {
     socket.emit('input', data);
   });
+  
   term.onResize((size: { cols: number; rows: number }) => {
     socket.emit('resize', size);
   });
@@ -58,6 +63,7 @@ socket.on('connect', () => {
         } else {
           term.write(remainingData);
         }
+        logWriter.writeLine(remainingData) 
       }
     })
     .on('login', () => {

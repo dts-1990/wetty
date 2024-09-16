@@ -23,6 +23,7 @@ const render = (
         <input type="button" onclick="location.reload();" value="reconnect" />
       </div>
     </div>
+    <input type="button" id="fsOpenFileButton" value="Save to File" />
     <div id="options">
       <a class="toggler"
          href="#"
