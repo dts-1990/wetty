@@ -4,6 +4,7 @@
 @use './overlay';
 @use './options';
 @use './terminal';
+@use './button';
 
 html,
 body {
@@ -20,6 +21,10 @@ body {
 
 .xterm {
   .xterm-viewport {
-    overflow-y: hidden;
+    position: absolute;
+    right: -20px;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
   }
 }

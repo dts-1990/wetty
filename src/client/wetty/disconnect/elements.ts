@@ -3,3 +3,4 @@ export const terminal = document.getElementById('terminal');
 export const editor = document.querySelector(
   '#options .editor',
 ) as HTMLIFrameElement;
+export const serilizebutton = document.getElementById('fsOpenFileButton');

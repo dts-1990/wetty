@@ -23,14 +23,35 @@ const render = (
         <input type="button" onclick="location.reload();" value="reconnect" />
       </div>
     </div>
-    <input type="button" id="fsOpenFileButton" value="Save to File" />
-    <div id="options">
-      <a class="toggler"
-         href="#"
-         alt="Toggle options"
-       ><i class="fas fa-cogs"></i></a>
-      <iframe class="editor" src="${base}/client/xterm_config/index.html"></iframe>
-    </div>
+    <ul>
+        <li>
+            <div class="container">
+              <a href="#" class="custombutton" id="fsOpenFileButton">Serialize to klogg</a>
+            </div> 
+        </li>
+        <li>
+            <div id="options">
+               <p>
+               <a class="toggler"
+                  href="#"
+                  alt="Toggle options"
+                ><i class="fas fa-cogs"></i></a>
+               </p>
+               <iframe class="editor" src="${base}/client/xterm_config/index.html"></iframe>
+             </div>
+        </li>
+        <style>
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        li {
+          display: inline;
+          margin-right: 10px; /* optional, adds some spacing between list items */
+        }
+        </style>
+    </ul>
     <div id="terminal"></div>
     ${jsFiles
         .map(file => `    <script type="module" src="${base}/client/${file}"></script>`)

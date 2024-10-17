@@ -21,7 +21,6 @@ export class LogWriter {
   constructor(public buttonId = "fsOpenFileButton", name = 'logFile') {
     const fsOpenButton = document.getElementById(this.buttonId)
     if (!fsOpenButton) return;
-    fsOpenButton.innerText = 'SaveFilePicker'
     fsOpenButton.onclick = () => {
       window.showSaveFilePicker({
               id: 'logWriter',

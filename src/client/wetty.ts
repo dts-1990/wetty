@@ -5,7 +5,7 @@ import _ from 'lodash';
 import '../assets/scss/styles.scss';
 
 import { disconnect } from './wetty/disconnect';
-import { overlay } from './wetty/disconnect/elements';
+import { overlay, serilizebutton } from './wetty/disconnect/elements';
 import { verifyPrompt } from './wetty/disconnect/verify';
 import { FileDownloader } from './wetty/download';
 import { FlowControlClient } from './wetty/flowcontrol';
@@ -29,6 +29,7 @@ socket.on('connect', () => {
   if (_.isUndefined(term)) return;
 
   if (!_.isNull(overlay)) overlay.style.display = 'none';
+  if (!_.isNull(serilizebutton)) serilizebutton.setAttribute("onclick","functionName()");
   window.addEventListener('beforeunload', verifyPrompt, false);
   window.addEventListener('resize', onResize(term), false);
 
