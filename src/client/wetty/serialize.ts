@@ -17,35 +17,41 @@ export class LogWriter {
   writerReady: FileSystemWritableFileStream
   contents: string
   isWriting = false
-    
-  constructor(public buttonId = "fsOpenFileButton", name = 'logFile') {
+
+  constructor(public buttonId = "fsOpenFileButton", name = "logFile.txt") {
     const fsOpenButton = document.getElementById(this.buttonId)
     if (!fsOpenButton) return;
-    fsOpenButton.onclick = () => {
-      window.showSaveFilePicker({
-              id: 'logWriter',
-              startIn: 'downloads', // documents, desktop, music, pictures, videos
-              suggestedName: name,
-              types: [ 
-                {
-                  description: 'Text Files',
-                  accept: { 'text/plain': ['.txt'], },
-                },
-              ],
-            }).then((value: any) => {
-              this.fileHandle = value as FileSystemFileHandle
-              console.log("Handler: ", this.fileHandle)
-              this.openWriteable()
-            }
-            , (rej: any) => {
-        console.warn(`showOpenFilePicker failed: `, rej)
-      });
-    }
+    fsOpenButton.onclick = () => this.saveFile(name)
   }
-  
+
+  async saveFile(name: string)
+  {
+    window.showSaveFilePicker({
+            id: 'logWriter',
+            startIn: 'downloads', // documents, desktop, music, pictures, videos
+            suggestedName: name,
+            types: [
+              {
+                description: 'Text Files',
+                accept: { 'text/plain': ['.txt'], },
+              },
+            ],
+          }).then((value: any) => {
+            this.fileHandle = value as FileSystemFileHandle
+            console.log("Handler: ", this.fileHandle)
+            this.openWriteable()
+
+            console.log("Open URL")  
+            window.open("klogg://~/Downloads/logFile.txt");
+          }
+          , (rej: any) => {
+      console.warn(`showOpenFilePicker failed: `, rej)
+    });
+  }
+
   async openWriteable(options: FileSystemCreateWritableOptions = { keepExistingData: true }) {
     if (!this.fileHandle) throw (Error("No file handler"))
-    
+
     const writeable = await this.fileHandle.createWritable(options)
     const offset = (await this.fileHandle.getFile()).size
     writeable.seek(offset)
