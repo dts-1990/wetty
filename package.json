@@ -22,7 +22,7 @@
     "lint:fix": "eslint --fix src",
     "start": "NODE_ENV=production node .",
     "test": "mocha",
-    "prepare": "husky install"
+    "prepare": "is-ci || husky"
   },
   "repository": "git://github.com/butlerx/wetty.git",
   "author": "Cian Butler <butlerx@notthe.cloud> (cianbutler.ie)",
