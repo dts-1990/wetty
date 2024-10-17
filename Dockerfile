@@ -6,7 +6,7 @@ RUN corepack enable
 RUN npx pnpm i -g pnpm@latest
 WORKDIR /usr/src/app
 COPY . /usr/src/app
-RUN node -v
+
 
 FROM base AS prod-deps
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
@@ -15,7 +15,8 @@ FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run build
 
-FROM node:current-alpine
+
+FROM base
 LABEL maintainer="dtscse@gmail.com"
 WORKDIR /usr/src/app
 ENV NODE_ENV=production
